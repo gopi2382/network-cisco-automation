@@ -1,0 +1,30 @@
+name: Cisco Config Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install Ansible, Paramiko, and SSH tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install ansible paramiko
+        sudo apt-get update
+        sudo apt-get install -y sshpass
+
+    - name: Run Ansible Playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: "False"
+      run: ansible-playbook -i inventory.ini playbooks/basic_config.yml
