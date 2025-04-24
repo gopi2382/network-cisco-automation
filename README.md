@@ -13,3 +13,4 @@ This project automates configuration of Cisco IOS-XE devices using:
 docker-compose up -d
 docker exec -it ansible-cisco /bin/bash
 ansible-playbook -i inventory.ini playbooks/basic_config.yml
+Trigger from webhook to Jenkins
