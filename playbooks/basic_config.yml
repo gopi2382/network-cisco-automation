@@ -16,3 +16,15 @@
     - name: Save Config
       ios_config:
         save_when: changed
+
+    - name: Show hostname and interface config (confirm change)
+      ios_command:
+        commands:
+          - show running-config | include hostname
+          - show run interface GigabitEthernet2
+      register: show_output
+
+    - name: Print command output to Jenkins
+      debug:
+        var: show_output.stdout_lines
+
