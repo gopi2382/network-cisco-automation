@@ -1,0 +1,146 @@
+# Mission 1 - Region: North
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mission1
+  template:
+    metadata:
+      labels:
+        app: mission1
+        region: north
+    spec:
+      containers:
+      - name: mission1
+        image: python:3.10
+        command: ["python3", "-m", "http.server", "8081"]
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mission1-service
+spec:
+  type: NodePort
+  selector:
+    app: mission1
+  ports:
+    - port: 80
+      targetPort: 8081
+      nodePort: 30081
+
+# Mission 2 - Region: South
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mission2
+  template:
+    metadata:
+      labels:
+        app: mission2
+        region: south
+    spec:
+      containers:
+      - name: mission2
+        image: python:3.10
+        command: ["python3", "-m", "http.server", "8082"]
+        ports:
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mission2-service
+spec:
+  type: NodePort
+  selector:
+    app: mission2
+  ports:
+    - port: 80
+      targetPort: 8082
+      nodePort: 30082
+
+# Mission 3 - Region: East
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mission3
+  template:
+    metadata:
+      labels:
+        app: mission3
+        region: east
+    spec:
+      containers:
+      - name: mission3
+        image: python:3.10
+        command: ["python3", "-m", "http.server", "8083"]
+        ports:
+        - containerPort: 8083
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mission3-service
+spec:
+  type: NodePort
+  selector:
+    app: mission3
+  ports:
+    - port: 80
+      targetPort: 8083
+      nodePort: 30083
+
+# Mission 4 - Region: West
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mission4
+  template:
+    metadata:
+      labels:
+        app: mission4
+        region: west
+    spec:
+      containers:
+      - name: mission4
+        image: python:3.10
+        command: ["python3", "-m", "http.server", "8084"]
+        ports:
+        - containerPort: 8084
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mission4-service
+spec:
+  type: NodePort
+  selector:
+    app: mission4
+  ports:
+    - port: 80
+      targetPort: 8084
+      nodePort: 30084

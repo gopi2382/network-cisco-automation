@@ -1,0 +1,9 @@
+---
+- name: Deploy multiple mission pods to Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Apply the mission deployments and services
+      kubernetes.core.k8s:
+        state: present
+        namespace: default
+        src: k8s-missions.yml

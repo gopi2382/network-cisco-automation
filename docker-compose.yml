@@ -8,6 +8,7 @@ services:
     container_name: ansible-cisco
     volumes:
       - .:/app
+      - "C:/Users/User/.kube:/root/.kube"  # ✅ Add this line to give kubeconfig access
     working_dir: /app
     command: sleep infinity
 
